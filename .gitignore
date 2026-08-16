@@ -1,0 +1,9 @@
+.venv/
+.__pycache__/
+
+# CPython files
+*.pyc
+*.pyo
+*.pyd
+*.so
+__pycache__/
