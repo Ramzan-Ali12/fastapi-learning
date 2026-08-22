@@ -1,6 +1,15 @@
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 
-def authenticate_user(authorization: str = Header()):
-    if authorization != "secret123":
-        raise HTTPException(status_code=401, detail="Unauthorized")
+security = HTTPBearer()
+
+
+def authenticate_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+    if credentials.credentials != "secret123":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication"
+        )
