@@ -1,6 +1,6 @@
-from fastapi import APIRouter
-
-router = APIRouter()
+from fastapi import APIRouter, Depends
+from dependency import authenticate_user
+router = APIRouter(dependencies=[Depends(authenticate_user)])
 # get products
 
 
@@ -17,7 +17,7 @@ async def create_product():
 # search router
 @router.get("/search")
 async def search_product(name: str):
-    return {"message": "Searching Product!", "name": "Laptop"}
+    return {"message": "Searching Product!", "name": name}
 
 # get product by id
 @router.get("/{product_id}")
