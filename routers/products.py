@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 
-from dependency import authenticate_user
+from dependency import  get_current_user
 
 
 router = APIRouter(
-    dependencies=[Depends(authenticate_user)]
+    dependencies=[Depends(get_current_user)]
 )
 
 
